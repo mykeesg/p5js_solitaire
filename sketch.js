@@ -109,7 +109,52 @@ function draw()
 						}
 					}
 				}
-			}		
+			}
+			if(mouseButton == CENTER)
+			{
+				clicked = true;				
+				var changed = false;
+				do
+				{
+					changed = false;
+						for(var i=0;i<board.length;++i)
+						{
+							var currentCard = board[i].getTop();
+							if(currentCard && !currentCard.hidden)
+							{
+								for(var j=0;j<finalPiles.length;++j)
+								{
+									if((finalPiles[j].empty() && currentCard.value=='A') || 
+										(!finalPiles[j].empty() && finalPiles[j].getTop().color == currentCard.color && finalPiles[j].getTop().lessThan(currentCard)))
+									{
+										board[i].removeTop();
+										finalPiles[j].placeOnTop(currentCard);
+										changed = true;
+										break;
+									}
+								}
+							}
+						}
+						
+						
+						var currentCard = playedPile.getTop();
+						if(currentCard)
+						{
+							for(var j=0;j<finalPiles.length;++j)
+							{
+								if((finalPiles[j].empty() && currentCard.value=='A') || 
+										(!finalPiles[j].empty() && finalPiles[j].getTop().color == currentCard.color && finalPiles[j].getTop().lessThan(currentCard)))
+								{
+									playedPile.removeTop();
+									finalPiles[j].placeOnTop(currentCard);
+									changed = true;
+									break;
+								}
+							}
+						}
+				}
+				while(changed==true);				
+			}
 			if(mouseButton == LEFT)
 			{
 				if(sourcePile==stockPile)
