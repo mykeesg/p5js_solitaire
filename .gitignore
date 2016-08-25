@@ -1,0 +1,6 @@
+#OS junk
+[Tt]humbs.db
+*.DS_Store
+
+#Notepad++ backup file
+*.bak
